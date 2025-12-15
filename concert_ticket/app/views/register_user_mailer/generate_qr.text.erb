@@ -1,0 +1,15 @@
+Thank you for join us
+
+Hi <%= @receiver.location %> admin
+
+    This is your information,
+    Company name: <%= @receiver.location %>
+    Numbers of Quota: <%= @receiver.numbers.to_i - @receiver.ticket_used.to_i %>
+    Please share this QR code to someone is interest in <%= @event["name"] %>
+                
+        <% if @receiver.qr_code.attached? %>
+            <%= image_tag(url_for(@receiver.qr_code), style: "width: 100%; height: 100%") %>
+        <% end %>
+
+Thanks,
+The PD music Team

@@ -1,0 +1,25 @@
+<div class="relative overflow-x-auto sm:rounded-lg">
+    <div class="grid grid-cols-2 mb-5 justify-self-end w-md">
+        <div class="self-end">
+            <label for="search-detail" class="block mb-2 text-right text-sm font-athiti font-medium text-gray-900 dark:text-white pe-5"><%= t("user.search") %> : </label>
+        </div>
+        <div>
+            <input type="text" id="search-detail" class="font-athiti w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 placeholder:text-gray-400 sm:text-sm/6" data-action="keyup->user#search_detail" />
+        </div>
+    </div>
+    <%= content_tag :table, class: "w-full text-sm text-left rtl:text-right text-gray-800 rounded-t-2xl", id: "table-user", width: "100%", data: { url: user_datatable_path(format: :json) } do %>
+    <thead class="text-xs text-white uppercase bg-red-900 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+            <th scope="col" class="font-athiti text-sm px-6 py-3"><%= t("user.table.column1") %></th>
+            <th scope="col" class="font-athiti text-sm px-6 py-3"><%= t("user.table.column2") %></th>
+            <th scope="col" class="font-athiti text-sm px-6 py-3"><%= t("user.table.column3") %></th>
+            <th scope="col" class="font-athiti text-sm px-6 py-3"><%= t("user.table.column4") %></th>
+            <th scope="col" class="font-athiti text-sm text-center px-6 py-3"><%= t("user.table.column5") %></th>
+            <th scope="col" class="font-athiti text-sm text-center px-6 py-3"><%= t("user.table.column6") %></th>
+        </tr>
+    </thead>
+    <tbody>
+    
+    </tbody>
+    <% end %>
+</div>

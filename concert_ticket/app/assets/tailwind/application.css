@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Athiti:wght@200;300;400;500;600;700&display=swap");
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+
+
+@theme {
+    --font-athiti: "Athiti", sans-serif; 
+}
+
+.div-alert-success{
+    background: #DEF7EC;
+    color: #03543F;
+    border-top: 4px;
+    border-color: #84E1BC;
+}
+.div-alert-error{
+    background: #FDE8E8;
+    color: #9B1C1C;
+    border-top: 4px;
+    border-color: #F8B4B4;
+}
+.div-alert-warning{
+    background: #FDF6B2;
+    color: #723B13;
+    border-top: 4px;
+    border-color: #FACA15;
+}
+.btn-close-alert-success{
+    background: #F3FAF7;
+    color: #0E9F6E;
+}
+.btn-close-alert-success:hover{
+    background: #BCF0DA;
+}
+.btn-close-alert-error{
+    background: #FDF2F2;
+    color: #F05252;
+}
+.btn-close-alert-error:hover{
+    background: #FBD5D5;
+}
+.btn-close-alert-warning{
+    background: #FDFDEA;
+    color: #C27803;
+}
+.btn-close-alert-warning:hover{
+    background: #FCE96A;
+}
+.dt-empty{
+    text-align: center;
+    padding: 8px;
+    background: white;
+    font-family: "Athiti", sans-serif; 
+}
+
+.select2-results__option, .select2-search{
+    font-family: "Athiti", sans-serif;
+    font-size: 16px;
+}
+
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: #771D1D !important;
+    color: white;
+}

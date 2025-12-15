@@ -1,0 +1,64 @@
+<div class="space-y-12">
+    <div class="border-b border-gray-900/10 pb-12 rounded-md">
+        <h2 class="text-base/7 font-athiti font-semibold text-gray-900"><%= params[:id].blank? ? t("user.new_user.title") : t("user.edit_user.title") %></h2>
+
+        <div class="mt-10 grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-8">
+            <div class="sm:col-span-3">
+                <label for="username" class="block font-athiti text-sm/6 font-medium text-gray-900"><%= params[:id].blank? ? t("user.new_user.username_input") : t("user.edit_user.username_input") %></label>
+                <div class="mt-2">
+                    <%= f.text_field :username, value: @user.username, id: "username", class: "block w-full font-athiti rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 placeholder:text-gray-400 sm:text-sm/6", max: 150, required: true %>
+                </div>
+            </div>
+            <div class="sm:col-span-3">
+                <label for="password" class="block font-athiti text-sm/6 font-medium text-gray-900"><%= params[:id].blank? ? t("user.new_user.password_input") : t("user.edit_user.password_input") %></label>
+                <div class="mt-2">
+                    <div class="flex items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2">
+                        <% ecrypt_password = "" %>
+                        <% if @user.password.present? %>
+                            <% ecrypt_password = BCrypt::Engine.hash_secret(@user.password, @user.salt_password) %>
+                        <% end %>
+                        <%= f.password_field :password, value: ecrypt_password, id: "password", class: "block w-full font-athiti rounded-md bg-white pr-3 py-1.5 min-w-0 grow text-base text-gray-900 border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 placeholder:text-gray-400 sm:text-sm/6", max: 150, required: true %>
+                        <div class="grid shrink-0 grid-cols-1 focus-within:relative">
+                            <svg class="cursor-pointer col-start-1 row-start-1 mx-1 size-5 self-center justify-self-end text-gray-500 sm:size-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" data-action="mousedown->user#showPassword mouseup->user#hidePassword">
+                                <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
+                                <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sm:col-span-3">
+                <label for="first-name" class="block font-athiti text-sm/6 font-medium text-gray-900"><%= params[:id].blank? ?  t("user.new_user.firstname_input") : t("user.edit_user.firstname_input") %></label>
+                <div class="mt-2">
+                    <%= f.text_field :firstname, value: @user.firstname, id: "first-name", class: "block w-full font-athiti rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 placeholder:text-gray-400 sm:text-sm/6", max: 150 %>
+                </div>
+            </div>
+
+            <div class="sm:col-span-3">
+                <label for="last-name" class="block font-athiti text-sm/6 font-medium text-gray-900"><%= params[:id].blank? ? t("user.new_user.lastname_input") : t("user.edit_user.lastname_input") %></label>
+                <div class="mt-2">
+                    <%= f.text_field :lastname, value: @user.lastname, id: "last-name", class: "block font-athiti w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 placeholder:text-gray-400 sm:text-sm/6", max: 150 %>
+                </div>
+            </div>
+
+            <div class="sm:col-span-3">
+                <label for="phone-number" class="block font-athiti text-sm/6 font-medium text-gray-900"><%= params[:id].blank? ? t("user.new_user.phone_number_input") : t("user.edit_user.phone_number_input") %></label>
+                <div class="mt-2">
+                    <%= f.text_field :phone_number, value: @user.phone_number, id: "phone-number", class: "block w-full font-athiti rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 placeholder:text-gray-400 sm:text-sm/6", max: 50 %>
+                </div>
+            </div>
+
+            <div class="sm:col-span-3">
+                <label for="email" class="block font-athiti text-sm/6 font-medium text-gray-900"><%= params[:id].blank? ? t("user.new_user.email_input") : t("user.edit_user.email_input") %></label>
+                <div class="mt-2">
+                    <%= f.text_field :email, value: @user.email, id: "email", class: "block w-full font-athiti rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 placeholder:text-gray-400 sm:text-sm/6", max: 200 %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-6 flex items-center justify-end gap-x-6">
+    <%= link_to params[:id].blank? ? t("user.new_user.btn_close") : t("user.edit_user.btn_close"), user_path(), method: "get", type: "button", class: "font-athiti cursor-pointer text-sm/6 font-semibold text-gray-900" %>
+    <button type="submit" class="font-athiti cursor-pointer rounded-md bg-red-900 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900"><%= params[:id].blank? ? t("user.new_user.btn_submit") : t("user.edit_user.btn_submit") %></button>
+</div>

@@ -1,0 +1,178 @@
+# Files in the config/locales directory are used for internationalization and
+# are automatically loaded by Rails. If you want to use locales other than
+# English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more about the API, please read the Rails Internationalization guide
+# at https://guides.rubyonrails.org/i18n.html.
+#
+# Be aware that YAML interprets the following case-insensitive strings as
+# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
+# must be quoted to be interpreted as strings. For example:
+#
+#     en:
+#       "yes": yup
+#       enabled: "ON"
+
+th:
+  title: "Hello world"
+  sub_title: "สร้าง QR code เพื่อลงทะเบียน"
+  select_event: "เลือก Event"
+  select_event_prompt: "กรุณาเลือก Event"
+  check_default: "ตั้งค่าเริ่มต้น"
+  btn_select_event: "ตกลง"
+  add_event:
+    title: "สร้าง Event"
+    title_edit: "แก้ไข Event"
+    event_name: "ชื่อ Event"
+    date: "วันจัดงาน"
+    check_default: "ตั้งค่าเริ่มต้น"
+    btn_create_event: "+ สร้าง"
+    btn_update_event: "อัพเดต"
+  dashboard:
+    tab1: "Report"
+    tab2: "รายละเอียด"
+    graph_title1: "จำนวนผู้มาลงทะเบียน"
+    graph_title2: "เพศชาย"
+    graph_title3: "เพศหญิง"
+    graph_title4: "ไม่ระบุเพศ"
+    unit: "คน"
+    title_graph_channel_to_know: "ช่องทางที่ได้รับข่าวสาร"
+    title_graph_province: "10 อันดับจังหวัดที่มีผู้ลงทะเบียนมากที่สุด"
+    title_graph_participate: "จำนวนคนที่สนใจเข้าร่วม event ต่างๆ"
+    search: "ค้นหา"
+    table:
+      column1: "ชื่อ-นามสกุล"
+      column2: "เบอร์โทรศัพท์"
+      column3: "เพศ"
+      column4: "ช่องทางที่ได้รับข่าวสาร"
+      column5: "ชื่อองค์กร"
+      column6: "จังหวัด/อำเภอ"
+      column7: "สนใจเข้าร่วม"
+      column8: "Action"
+      subcolumn1: "เวิร์คช็อป"
+      subcolumn2: "คอนเสิร์ต"
+    confirm_delete_user: "คุณต้องการจะลบคนที่ลงทะเบียนคนนี้ใช่หรือไม่ ?"
+  generate_qr:
+    location_placeholder: "ชื่อองค์กร"
+    location_validate_message: "กรุณากรอกชื่อองค์กร"
+    number_placeholder: "จำนวนบัตร"
+    quota_validate_message: "กรุณากรอกจำนวนโควต้าด้วยตัวเลขเท่านั้น"
+    email_placeholder: "Email"
+    email_validate_message: "กรุณากรอก Email"
+    phone_number_placeholder: "เบอร์โทรศัพท์"
+    phone_number_validate_message: "กรุณากรอกเบอร์โทรศัพท์"
+  btn_get_qr: "สร้าง QR Code"
+  btn_search_qr: "ค้นหา QR Code"
+  search_qr:
+    search_placeholder: "ชื่อองค์กร"
+    btn_submit_search: "ค้นหา"
+  qr_modal:
+    title: "QR Code"
+    remain_quota: "จำนวนคนลงทะเบียนคงเหลือ"
+    location_name: "ชื่อองค์กร"
+    btn_close_modal: "ปิด"
+  registration_form:
+    title: "ลงทะเบียน"
+    ticket_origin_input: "ได้รับตั๋วจาก"
+    firstname_input: "ชื่อ"
+    firstname_validate_message: "กรุณากรอกชื่อ"
+    lastname_input: "นามสกุล"
+    lastname_validate_message: "กรุณากรอกนามสกุล"
+    country_input: "ประเทศ"
+    province_input: "จังหวัด"
+    district_input: "เขต/อำเภอ"
+    phone_number_input: "เบอร์โทรศัพท์"
+    phone_number_validate_message: "กรุณากรอกเบอร์โทรศัพท์"
+    email_input: "Email"
+    email_validate_message: "กรุณากรอก Email"
+    dob_input: "วันเดือนปีเกิด (01/01/2001)"
+    age_input: "อายุ"
+    gender_input: "เพศ"
+    radio1: "ชาย"
+    radio2: "หญิง"
+    radio3: "ไม่ระบุ"
+    participate_title: "คุณต้องการเข้าร่วมอะไรบ้าง (สามารถเลือกได้มากกว่า 1)"
+    participate_checkbox1: "เวิร์คช็อป"
+    participate_checkbox2: "คอนเสิร์ต"
+    participate_invalid_text: "กรุณาเลือกกิจกรรมที่สนใจอยากเข้าร่วมอย่างน้อย 1 กิจกรรม"
+    workshop_gg_form: "กรุณากรอกข้อมูลใน Google form เพื่อเป็นประโยชน์ในการเข้าร่วมเวิร์คช็อป"
+    channel_input: "ช่องทางที่ได้รับข่าวสาร"
+    prompt_channel_input: "โปรดระบุช่องทางที่ได้รับข่าวสาร"
+    btn_submit: "ลงทะเบียน"
+    btn_close: "ยกเลิก"
+    other_register:
+      title: "ลงทะเบียนเข้างาน คนที่"
+      firstname_input: "ชื่อ"
+      lastname_input: "นามสกุล"
+      phone_number_input: "เบอร์โทรศัพท์"
+      email_input: "Email"
+      dob_input: "วันเดือนปีเกิด (01/01/2001)"
+      age_input: "อายุ"
+      gender_input: "เพศ"
+      radio1: "ชาย"
+      radio2: "หญิง"
+      radio3: "ไม่ระบุ"
+      channel_input: "ช่องทางที่ได้รับข่าวสาร"
+      prompt_channel_input: "โปรดระบุช่องทางที่ได้รับข่าวสาร"
+      btn_submit: "ลงทะเบียน"
+      btn_close: "ยกเลิก"
+  register_success1: "ลงทะเบียนเข้างานสำเร็จ"
+  register_success2: "ขอบคุณที่สนใจและมาเป็นส่วนหนึ่งใน Siam world music festival ทีมงานได้จัดส่งตั๋วเข้างานไปยัง Email(อาจอยู่ในช่อง spam)"
+  register_success3: "ขอให้มีความสุขกับคอนเสิร์ต แล้วพบกันในวันที่ 9 พฤศจิกายน 2025 นะครับ"
+  btn_register_other: "ลงทะเบียนให้ผู้อื่น"
+  scan_qr:
+    subtitle: "สแกน QR code"
+    participate_modal:
+      title: "ผลลัพท์ของ QR code"
+      success_message: "ยืนยันการเข้าร่วมสำเร็จ"
+      error_message: "การเข้าร่วมไม่สำเร็จ"
+      error_sub_message: "ไม่พบข้อมูลผู้ลงทะเบียน กรุณาลองใหม่อีกครั้ง"
+      fullname: "ชื่อ-สกุล"
+      phone_number: "เบอร์โทรศัพท์"
+      country_province: "ประเทศ/จังหวัด"
+      channel_to_know: "ช่องทางที่ได้รับข่าวสาร"
+      ticket_from: "ได้รับตั๋วจาก"
+  user:
+    title: "รายชื่อผู้ใช้งาน"
+    search: "ค้นหา"
+    table:
+      column1: "ชื่อผู้ใช้งาน"
+      column2: "ชื่อ-นามสกุล"
+      column3: "Email"
+      column4: "เบอร์โทรศัพท์"
+      column5: "สถานะ"
+      column6: "Action"
+    new_user:
+      title: "เพิ่มผู้ใช้ใหม่"
+      username_input: "Username"
+      password_input: "Password"
+      firstname_input: "ชื่อ"
+      lastname_input: "นามสกุล"
+      phone_number_input: "เบอร์โทรศัพท์"
+      email_input: "Email"
+      btn_submit: "เพิ่ม"
+      btn_close: "ยกเลิก"
+    edit_user:
+      title: "แก้ไขข้อมูลผู้ใช้"
+      username_input: "Username"
+      password_input: "Password"
+      firstname_input: "ชื่อ"
+      lastname_input: "นามสกุล"
+      phone_number_input: "เบอร์โทรศัพท์"
+      email_input: "Email"
+      btn_submit: "อัพเดต"
+      btn_close: "ยกเลิก"

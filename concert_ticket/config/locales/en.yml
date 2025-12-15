@@ -1,0 +1,180 @@
+# Files in the config/locales directory are used for internationalization and
+# are automatically loaded by Rails. If you want to use locales other than
+# English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more about the API, please read the Rails Internationalization guide
+# at https://guides.rubyonrails.org/i18n.html.
+#
+# Be aware that YAML interprets the following case-insensitive strings as
+# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
+# must be quoted to be interpreted as strings. For example:
+#
+#     en:
+#       "yes": yup
+#       enabled: "ON"
+
+en:
+  title: "Hello world"
+  sub_title: "Generate QR code for registration"
+  select_event: "Select event"
+  select_event_prompt: "Please select event"
+  check_default: "Set default"
+  btn_select_event: "Confirm"
+  add_event:
+    title: "Create new event"
+    title_edit: "Edit event"
+    event_name: "Event name"
+    date: "Event date"
+    check_default: "Set default"
+    btn_create_event: "+ Create new"
+    btn_update_event: "Update"
+  dashboard:
+    tab1: "Report"
+    tab2: "Detail"
+    graph_title1: "Number of registered"
+    graph_title2: "Male"
+    graph_title3: "Female"
+    graph_title4: "Not specific"
+    unit: "person"
+    title_graph_channel_to_know: "Channel to know"
+    title_graph_province: "Top 10 province of registered users"
+    title_graph_participate: "Numbers of person are interest to participate the event"
+    search: "Search"
+    table:
+      column1: "Name"
+      column2: "Phone number"
+      column3: "Gender"
+      column4: "Channel to know"
+      column5: "Company name"
+      column6: "Province/District"
+      column7: "Participate"
+      column8: "Action"
+      subcolumn1: "Workshop"
+      subcolumn2: "Concert"
+    confirm_delete_user: "Are you sure you want to delete registered user ?"
+  generate_qr:
+    location_placeholder: "Company name"
+    location_validate_message: "Company name could not be blank"
+    number_placeholder: "Number of quota"
+    quota_validate_message: "Please fill quota with number only"
+    email_placeholder: "Email"
+    email_validate_message: "Email could not be blank"
+    phone_number_placeholder: "Phone number"
+    phone_number_validate_message: "Phone number could not be blank"
+  btn_get_qr: "Get QR Code"
+  btn_search_qr: "Search QR Code"
+  search_qr:
+    search_placeholder: "Company name"
+    btn_submit_search: "Search"
+  qr_modal:
+    title: "QR Code"
+    remain_quota: "Remaining quota"
+    location_name: "Company name"
+    btn_close_modal: "Close"
+  registration_form:
+    title: "Registration"
+    ticket_origin_input: "Ticket from"
+    firstname_input: "Firstname"
+    firstname_validate_message: "Firstname could not be blank"
+    lastname_input: "Lastname"
+    lastname_validate_message: "Lastname could not be blank"
+    country_input: "Country"
+    province_input: "Province"
+    district_input: "District"
+    phone_number_input: "Phone number"
+    phone_number_validate_message: "Phone number could not be blank"
+    email_input: "Email address"
+    email_validate_message: "Email could not be blank"
+    dob_input: "Date of Birth (01/01/2001)"
+    age_input: "Age"
+    gender_input: "Gender"
+    radio1: "Male"
+    radio2: "Female"
+    radio3: "No specific"
+    participate_title: "Please choose events are you want to participate (Able to choose more than 1)"
+    participate_checkbox1: "Workshop"
+    participate_checkbox2: "Concert"
+    participate_invalid_text: "Please choose events are you want to participate less than 1"
+    workshop_gg_form: "Please fill the information in Google form to be useful in participate in the workshop"
+    channel_input: "Channel to know"
+    prompt_channel_input: "Please select channel to know"
+    btn_submit: "Register"
+    btn_close: "Cancel"
+    other_register:
+      title: "register person"
+      firstname_input: "Fistname"
+      lastname_input: "Lastname"
+      phone_number_input: "Phone number"
+      email_input: "Email address"
+      dob_input: "Date of Birth (01/01/2001)"
+      age_input: "Age"
+      gender_input: "Gender"
+      radio1: "Male"
+      radio2: "Female"
+      radio3: "No specific"
+      channel_input: "Channel to know"
+      prompt_channel_input: "Please select channel to know"
+      btn_submit: "Register"
+      btn_close: "Cancel"
+  register_success1: "Register event successfully"
+  register_success2: "Thank you for join with us. We've attached the ticket to your email address(maybe in spam)"
+  register_success3: "Hope you enjoy and happy in event. see you on November 19, 2025"
+  btn_register_other: "Register other one"
+  scan_qr:
+    subtitle: "Scan QR code"
+    participate_modal:
+      title: "QR Result"
+      success_message: "Participated succussfully"
+      error_message: "Participated failed"
+      error_sub_message: "Cannot found user information. Please try again."
+      fullname: "Full name"
+      phone_number: "Telephone number"
+      country_province: "Country/Province"
+      channel_to_know: "Channel to know"
+      ticket_from: "Ticket from"
+  user:
+    title: "User"
+    search: "Search"
+    table:
+      column1: "Username"
+      column2: "Name"
+      column3: "Email"
+      column4: "Phone number"
+      column5: "Status"
+      column6: "Action"
+    new_user:
+      title: "Add new user"
+      username_input: "Username"
+      password_input: "Password"
+      firstname_input: "Fistname"
+      lastname_input: "Lastname"
+      phone_number_input: "Phone number"
+      email_input: "Email address"
+      btn_submit: "Add"
+      btn_close: "Cancel"
+    edit_user:
+      title: "Edit user"
+      username_input: "Username"
+      password_input: "Password"
+      firstname_input: "Fistname"
+      lastname_input: "Lastname"
+      phone_number_input: "Phone number"
+      email_input: "Email address"
+      btn_submit: "Add"
+      btn_close: "Cancel"
+    
+

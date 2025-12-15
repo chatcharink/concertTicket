@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>">
+  <head>
+    <title><%= content_for(:title) || "Concert Ticket Online" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <!--link rel="manifest" href="/manifest.json"-->
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <link href="https://fonts.googleapis.com/css2?family=Athiti:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
+  </head>
+
+  <body class="h-screen bg-no-repeat bg-fixed bg-cover bg-center pt-10 overflow-hidden" style="background-image: url(<%= APP_CONFIG[:application_path] %>/pictures/background.png)">
+    <% if !session["current_user"].blank? %>
+      <%= render "layouts/nav_bar" %>
+    <% end %>
+
+    <%= render "layouts/flash_message" %>
+    <%# <div class="bg-[url(/pictures/background.png)] bg-no-repeat bg-fixed bg-cover bg-center pt-10 pb-20 h-screen"> %>
+      <main class="container mx-auto h-full w-full overflow-auto" id="main-contrainer">
+      <%# <div class="absolute inset-0  h-screen -z-1"></div> %>
+        <%= yield %>
+      </main>
+    <%# </div> %>
+    <%# <script src="../path/to/flowbite/dist/flowbite.min.js"></script> %>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+<div class="space-y-12">
+    <div class="border-b border-gray-900/10 pb-12 rounded-md text-center">
+        <svg class="w-30 text-green-800 m-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 21 21">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6.072 10.072 2 2 6-4m3.586 4.314.9-.9a2 2 0 0 0 0-2.828l-.9-.9a2 2 0 0 1-.586-1.414V5.072a2 2 0 0 0-2-2H13.8a2 2 0 0 1-1.414-.586l-.9-.9a2 2 0 0 0-2.828 0l-.9.9a2 2 0 0 1-1.414.586H5.072a2 2 0 0 0-2 2v1.272a2 2 0 0 1-.586 1.414l-.9.9a2 2 0 0 0 0 2.828l.9.9a2 2 0 0 1 .586 1.414v1.272a2 2 0 0 0 2 2h1.272a2 2 0 0 1 1.414.586l.9.9a2 2 0 0 0 2.828 0l.9-.9a2 2 0 0 1 1.414-.586h1.272a2 2 0 0 0 2-2V13.8a2 2 0 0 1 .586-1.414Z"/>
+        </svg>
+        <div class="my-10">
+            <h2 class="text-xl font-athiti font-semibold text-gray-900 pb-4"><%= t("register_success1") %></h2>
+            <p class="font-athiti font-meduim  pb-4"><%= t("register_success2") %></p>
+            <p class="font-athiti font-meduim pb-2"><%= t("register_success3") %></p>
+        </div>
+
+        <button type="button" class="font-athiti cursor-pointer rounded-md bg-red-900 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 inline" data-action="click->register#getOtherUser" data-register-url-param="<%= registration_user_get_others_path(qr_id: @registered.qr_id, count: count) %>"><%= t("btn_register_other") %></button>
+        <%= button_to "Finish", siam_music_festival_path(), method: :get, class: "font-athiti cursor-pointer rounded-md bg-red-900 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600", form: { style: "display:inline" } %>
+    </div>
+</div>

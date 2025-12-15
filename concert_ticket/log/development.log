@@ -1,0 +1,53 @@
+  [1m[35m (19.6ms)[0m  [1m[35mCREATE DATABASE `pd_ticket_online` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35m (10.8ms)[0m  [1m[35mCREATE DATABASE `pd_ticket_online_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35m (67.7ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[35m (43.0ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT GET_LOCK('3342350973320105460', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (15.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.9ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Create (8.0ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2025-10-16 03:27:15.480616', '2025-10-16 03:27:15.480623')[0m
+Migrating to CreateQrInfos (20250419092213)
+  [1m[35m (59.1ms)[0m  [1m[35mCREATE TABLE `qr_infos` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `numbers` int, `location` varchar(250), `email` varchar(200), `qr_code` text, `ticket_used` int DEFAULT 0, `status` ENUM('active', 'inactive', 'deleted') DEFAULT 'active', `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (6.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20250419092213')[0m
+Migrating to CreateActiveStorageTables (20250419092311)
+  [1m[35m (47.5ms)[0m  [1m[35mCREATE TABLE `active_storage_blobs` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `key` varchar(255) NOT NULL, `filename` varchar(255) NOT NULL, `content_type` varchar(255), `metadata` text, `service_name` varchar(255) NOT NULL, `byte_size` bigint NOT NULL, `checksum` varchar(255), `created_at` datetime(6) NOT NULL, UNIQUE INDEX `index_active_storage_blobs_on_key` (`key`))[0m
+  [1m[35m (64.3ms)[0m  [1m[35mCREATE TABLE `active_storage_attachments` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `record_type` varchar(255) NOT NULL, `record_id` bigint NOT NULL, `blob_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, INDEX `index_active_storage_attachments_on_blob_id` (`blob_id`), UNIQUE INDEX `index_active_storage_attachments_uniqueness` (`record_type`, `record_id`, `name`, `blob_id`), CONSTRAINT `fk_rails_c3b3935057`
+FOREIGN KEY (`blob_id`)
+  REFERENCES `active_storage_blobs` (`id`)
+)[0m
+  [1m[35m (43.9ms)[0m  [1m[35mCREATE TABLE `active_storage_variant_records` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `blob_id` bigint NOT NULL, `variation_digest` varchar(255) NOT NULL, UNIQUE INDEX `index_active_storage_variant_records_uniqueness` (`blob_id`, `variation_digest`), CONSTRAINT `fk_rails_993965df05`
+FOREIGN KEY (`blob_id`)
+  REFERENCES `active_storage_blobs` (`id`)
+)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (8.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20250419092311')[0m
+Migrating to CreateRegisteredUsers (20250429164459)
+  [1m[35m (33.6ms)[0m  [1m[35mCREATE TABLE `registered_users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `firstname` varchar(150), `lastname` varchar(150), `email` varchar(200), `phone_number` varchar(50), `dob` date, `gender` smallint, `country` varchar(150), `province` varchar(150), `district` varchar(150), `channel_to_know` bigint, `default_language` bigint, `qr_id` bigint(20), `status` ENUM('registered', 'participated', 'inactive'), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (3.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20250429164459')[0m
+Migrating to CreateChannelToKnows (20250514091029)
+  [1m[35m (28.0ms)[0m  [1m[35mCREATE TABLE `channel_to_knows` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `channel_name_th` varchar(200), `channel_name_en` varchar(200), `status` ENUM('active', 'deleted'), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (3.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20250514091029')[0m
+Migrating to CreateProjects (20250514091050)
+  [1m[35m (44.0ms)[0m  [1m[35mCREATE TABLE `projects` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `project_name` varchar(200), `description` text, `date` date, `status` ENUM('active', 'deleted'), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (5.9ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20250514091050')[0m
+Migrating to CreateUsers (20250521082744)
+  [1m[35m (59.8ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `username` varchar(250), `salt_password` varchar(250), `password` varchar(250), `firstname` varchar(250), `lastname` varchar(250), `status` ENUM('active', 'inactive', 'deleted') DEFAULT 'active', `role` smallint, `email` varchar(250), `phone_number` varchar(20), `profile_pic` text, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (6.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20250521082744')[0m
+Migrating to CreateConcertInfos (20250521095936)
+  [1m[35m (47.5ms)[0m  [1m[35mCREATE TABLE `concert_infos` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `concert_name` varchar(255), `event_day` datetime(6), `is_default` smallint, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (7.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20250521095936')[0m
+Migrating to AddColumnEventIdToQrInfo (20250522155943)
+  [1m[35m (94.1ms)[0m  [1m[35mALTER TABLE `qr_infos` ADD `event_id` bigint(20)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (10.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20250522155943')[0m
+Migrating to AddAuthTokenToQrInfo (20250616080440)
+  [1m[35m (105.2ms)[0m  [1m[35mALTER TABLE `qr_infos` ADD `auth_token` varchar(255)[0m
+  [1m[35m (25.1ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_qr_infos_on_auth_token` ON `qr_infos` (`auth_token`)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (10.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20250616080440')[0m
+Migrating to AddPhoneNumberToQrInfo (20250616145841)
+  [1m[35m (95.8ms)[0m  [1m[35mALTER TABLE `qr_infos` ADD `phone_number` varchar(100)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (7.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20250616145841')[0m
+Migrating to AddColumnWorkshopAndConcertToRegisteredUser (20250816140212)
+  [1m[35m (75.1ms)[0m  [1m[35mALTER TABLE `registered_users` ADD `workshop` smallint[0m
+  [1m[35m (53.2ms)[0m  [1m[35mALTER TABLE `registered_users` ADD `concert` smallint[0m
+  [1m[36mActiveRecord::SchemaMigration Create (3.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20250816140212')[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT RELEASE_LOCK('3342350973320105460')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m

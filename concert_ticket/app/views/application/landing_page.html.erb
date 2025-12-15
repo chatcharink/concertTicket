@@ -1,0 +1,20 @@
+<div class="w-full h-full overflow-scroll absolute left-0 top-0" style="background-color: #fcf0dc;">
+    
+    <div class="mx-auto mt-[18rem] mb-[20rem]">
+        <h1 class="font-athiti font-bold opacity-0 transition-opacity duration-[2000ms] text-center text-[75px] lg:text-[100px]" id="welcome-txt" style="color: #37363b;">Welcome</h1>
+        <h1 class="font-athiti font-bold opacity-0 transition-opacity duration-[5000ms] text-center text-[55px] lg:text-[100px]" id="event-name-txt" style="color: #37363b;">SIAM WORLD MUSIC FESTIVAL</h1>
+    </div>
+    
+    <%= image_tag("#{APP_CONFIG[:application_path]}/pictures/siam_world_music_festival_map.png", class: "mx-auto mt-3") %>
+
+    <div class="h-[60px]"></div>
+</div>
+
+<script>
+    setTimeout(() => {
+        document.getElementById("welcome-txt").classList.add("opacity-100");
+    }, 500);
+    setTimeout(() => {
+        document.getElementById("event-name-txt").classList.add("opacity-100");
+    }, 500);
+</script>

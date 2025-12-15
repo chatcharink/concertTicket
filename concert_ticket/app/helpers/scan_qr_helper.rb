@@ -1,0 +1,2 @@
+module ScanQrHelper
+end

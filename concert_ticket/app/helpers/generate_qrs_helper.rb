@@ -1,0 +1,2 @@
+module GenerateQrsHelper
+end

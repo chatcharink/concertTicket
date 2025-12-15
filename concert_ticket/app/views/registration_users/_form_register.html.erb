@@ -1,0 +1,137 @@
+<%= form_for @user, url: registration_user_path(format: :json), method: :POST, html: { data: { "action": "submit->register#submitRegister" } } do |f| %>
+    <div class="space-y-12">
+        <div class="border-b border-gray-900/10 rounded-md">
+            <h2 class="text-base/7 font-athiti font-semibold text-gray-900"><%= t("registration_form.title") %></h2>
+
+            <div class="my-10 grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-8">
+                <div class="sm:col-span-full">
+                    <label for="location" class="block font-athiti text-sm/6 font-medium text-gray-900"><%= t("registration_form.ticket_origin_input") %></label>
+                    <div class="mt-2">
+                        <%= f.text_field :location_name, value: @location.location, id: "location", class: "font-athiti bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  block w-full p-2.5 cursor-not-allowed", disabled: true, "aria-label": "disabled input 2" %>
+                        <%= f.hidden_field :qr_id, value: @location.id %>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-3">
+                    <label for="first-name" class="block font-athiti text-sm/6 font-medium text-gray-900"><%= t("registration_form.firstname_input") %></label>
+                    <div class="mt-2">
+                        <%= f.text_field :firstname, value: "", id: "first-name", class: "block w-full font-athiti rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 placeholder:text-gray-400 sm:text-sm/6", max: 150 %>
+                        <p class="font-athiti mt-2 text-sm text-red-600 dark:text-red-500 hidden" id="firstname-validate-msg"><%= t("registration_form.firstname_validate_message") %></p>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-3">
+                    <label for="last-name" class="block font-athiti text-sm/6 font-medium text-gray-900"><%= t("registration_form.lastname_input") %></label>
+                    <div class="mt-2">
+                        <%= f.text_field :lastname, value: "", id: "last-name", class: "block font-athiti w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 placeholder:text-gray-400 sm:text-sm/6", max: 150 %>
+                        <p class="font-athiti mt-2 text-sm text-red-600 dark:text-red-500 hidden" id="lastname-validate-msg"><%= t("registration_form.lastname_validate_message") %></p>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-4">
+                    <label for="country" class="block font-athiti text-sm/6 font-medium text-gray-900"><%= t("registration_form.country_input") %></label>
+                    <div class="mt-2 grid grid-cols-1">
+                        <%= f.select :country, options_for_select(get_country(), selected: "TH"), {}, {class: "block w-full font-athiti rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 placeholder:text-gray-400 focus:outline-2 sm:text-sm/6", id: "country", required: true, "data-action": "change->register#changeCountry"} %>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-3">
+                    <label for="province" class="block font-athiti text-sm/6 font-medium text-gray-900"><%= t("registration_form.province_input") %></label>
+                    <div class="mt-2">
+                        <%= select_tag :province_select, options_for_select(arr_provinces(), selected: "กรุงเทพมหานคร"), {class: "block w-full font-athiti rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 placeholder:text-gray-400 focus:outline-2 sm:text-sm/6", id: "province-select", required: true} %>
+                        <%= text_field_tag :province_text, "", id: "province-text", class: "hidden w-full font-athiti rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 placeholder:text-gray-400 sm:text-sm/6" %>
+                        <%= f.hidden_field :province, value: "กรุงเทพมหานคร", id: "province" %>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-3">
+                    <label for="district" class="block font-athiti text-sm/6 font-medium text-gray-900"><%= t("registration_form.district_input") %></label>
+                    <div class="mt-2">
+                        <%= f.text_field :district, value: "", id: "district", class: "block w-full font-athiti rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 placeholder:text-gray-400 sm:text-sm/6" %>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-3">
+                    <label for="phone-number" class="block font-athiti text-sm/6 font-medium text-gray-900"><%= t("registration_form.phone_number_input") %></label>
+                    <div class="mt-2">
+                        <%= f.text_field :phone_number, value: "", id: "phone-number", class: "block w-full font-athiti rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 placeholder:text-gray-400 sm:text-sm/6", max: 50 %>
+                        <p class="font-athiti mt-2 text-sm text-red-600 dark:text-red-500 hidden" id="phone-validate-msg"><%= t("registration_form.phone_number_validate_message") %></p>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-3">
+                    <label for="email" class="block font-athiti text-sm/6 font-medium text-gray-900"><%= t("registration_form.email_input") %></label>
+                    <div class="mt-2">
+                        <%= f.text_field :email, value: "", id: "email", class: "block w-full font-athiti rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 placeholder:text-gray-400 sm:text-sm/6", max: 200 %>
+                        <p class="font-athiti mt-2 text-sm text-red-600 dark:text-red-500 hidden" id="email-validate-msg"><%= t("registration_form.email_validate_message") %></p>
+                    </div>
+                </div>
+                
+                <div class="sm:col-span-3 sm:col-start-1">
+                    <label for="dob" class="block font-athiti text-sm/6 font-medium text-gray-900"><%= t("registration_form.dob_input") %></label>
+                    <div class="mt-2">
+                        <%= f.date_field :dob, as: :date, value: "", class: "block w-full font-athiti rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 placeholder:text-gray-400 sm:text-sm/6" , id: "dob", data: { action: "change->register#getAge keyup->register#getAge"} %>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                    <label for="age" class="block font-athiti text-sm/6 font-medium text-gray-900"><%= t("registration_form.age_input") %></label>
+                    <div class="mt-2">
+                        <input type="text" name="age" id="age" class="bg-gray-100 font-athiti border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed" disabled>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-full content-center">
+                    <label for="gender-block" class="block text-sm/6 font-medium text-gray-900"><%= t("registration_form.gender_input") %></label>
+                    <div class="mt-6 space-y-6" id="gender-block">
+                        <div class="inline-flex items-center gap-x-3">
+                            <%= f.radio_button :gender, 1, class: "relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:!border-red-900 checked:!bg-red-900 checked:!text-red-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-300 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden", id: "gender-male", checked: true %>
+                            <label for="gender-male" class="inline text-sm/6 font-athiti font-medium text-gray-900"><%= t("registration_form.radio1") %></label>
+                        </div>
+                        <div class="inline-flex items-center gap-x-3 ms-5">
+                            <%= f.radio_button :gender, 2, class: "relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:!border-red-900 checked:!bg-red-900 checked:!text-red-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-300 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden", id: "gender-female" %>
+                            <label for="gender-female" class="inline text-sm/6 font-athiti font-medium text-gray-900"><%= t("registration_form.radio2") %></label>
+                        </div>
+                        <div class="inline-flex items-center gap-x-3 ms-5">
+                            <%= f.radio_button :gender, 3, class: "relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:!border-red-900 checked:!bg-red-900 checked:!text-red-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-300 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden", id: "gender-not-specific" %>
+                            <label for="gender-not-specific" class="inline text-sm/6 font-athiti font-medium text-gray-900"><%= t("registration_form.radio3") %></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-full content-center">
+                    <div id="div-participate-title">
+                        <label for="participate-block" class="block text-sm/6 font-athiti font-medium text-gray-900"><%= t("registration_form.participate_title") %></label>
+                        <p id="participate-invalid-msg" class="font-athiti text-sm/6 font-medium text-red-500 hidden"><%= t("registration_form.participate_invalid_text") %></p>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <%= f.check_box :workshop, { id: "participate-checkbox-1", class: "w-4 h-4 text-red-900 bg-white border-gray-300 rounded-sm focus:ring-red-900 dark:focus:ring-red-900 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600", data: { "action": "change->register#changeWorkshop" } }, 1, 0 %>
+                        <label for="participate-checkbox-1" class="ms-2 text-sm/6 font-athiti font-medium text-gray-900 dark:text-gray-300"><%= t("registration_form.participate_checkbox1") %></label>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <span class="text-sm/6 font-athiti font-medium text-gray-900 hidden" id="gg-form-link"><%= t("registration_form.workshop_gg_form") %> : 
+                            <%= link_to "https://forms.gle/M3pPvjmD5M2BLBxJ9", "https://forms.gle/M3pPvjmD5M2BLBxJ9",  target: "_blank", rel: "noopener noreferrer", class: "text-sm/6 font-athiti font-medium text-red-900" %>
+                        </span>
+                    </div>
+
+                    <div class="flex items-center mb-4">
+                        <%= f.check_box :concert, { id: "participate-checkbox-2", class: "w-4 h-4 text-red-900 bg-white border-gray-300 rounded-sm focus:ring-red-900 dark:focus:ring-red-900 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" }, 1, 0 %>
+                        <label for="participate-checkbox-2" class="ms-2 text-sm/6 font-athiti font-medium text-gray-900 dark:text-gray-300"><%= t("registration_form.participate_checkbox2") %></label>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-4">
+                    <label for="chanel-to-know" class="block font-athiti text-sm/6 font-medium text-gray-900"><%= t("registration_form.channel_input") %></label>
+                    <div class="mt-2">
+                        <%= f.select :channel_to_know, options_for_select(get_chanel(params[:locale])), {prompt: t("registration_form.prompt_channel_input") }, {class: "block w-full font-athiti rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 placeholder:text-gray-400 sm:text-sm/6", id: "chanel-to-know", required: true} %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-6 flex items-center justify-end gap-x-6">
+        
+        <button type="submit" id="btn-submit-form-register" class="font-athiti cursor-pointer rounded-md bg-red-900 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900 disabled:bg-red-300"><%= t("registration_form.btn_submit") %></button>
+    </div>
+<% end %>

@@ -1,0 +1,35 @@
+<% is_user_login? %>
+<div class="m-auto mt-20" data-controller="dashboard">
+    <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-styled-tab" data-tabs-toggle="#default-styled-tab-content" data-tabs-active-classes="bg-red-900 text-white font-semibold hover:text-white border-red-900 dark:border-purple-500" data-tabs-inactive-classes="dark:border-transparent text-gray-500 hover:bg-red-700 hover:text-white dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300 cursor-pointer" role="tablist">
+            <li class="me-2" role="presentation">
+                <button class="inline-block p-4 border-b-2 rounded-t-lg font-athiti font-semibold" id="report-styled-tab" data-tabs-target="#styled-report" type="button" role="tab" aria-controls="report" aria-selected="false"><%= t("dashboard.tab1") %></button>
+            </li>
+            <li class="me-2" role="presentation">
+                <button class="inline-block p-4 border-b-2 rounded-t-lg hover:border-gray-300 dark:hover:text-gray-300 font-athiti font-semibold" id="detail-styled-tab" data-tabs-target="#styled-detail" type="button" role="tab" aria-controls="detail" aria-selected="false" data-action="click->dashboard#show_detail"><%= t("dashboard.tab2") %></button>
+            </li>
+        </ul>
+    </div>
+    <div id="default-styled-tab-content" class="overflow-auto">
+        <div class="hidden p-4 rounded-lg" id="styled-report" role="tabpanel" aria-labelledby="report-tab">
+            <div class="grid grid-cols-2 m-auto mt-3 max-h-full p-5 min-h-full font-athiti bg-white rounded-lg">
+                <div class="mb-3">
+                <label for="dashboard-filter-company" class="block mb-2 text-sm text-red-900 font-semibold font-athiti text-gray-900 dark:text-white">Select company</label>
+                <%= select_tag :filter_company, options_for_select(get_company_name(), selected: ""), class: "block w-full font-athiti rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 placeholder:text-gray-400 focus:outline-2 sm:text-sm/6", id: "dashboard-filter-company", "data-action": "change->dashboard#filterCompany", "data-dashboard-url-param": "#{dashboard_filter_url()}" %>
+                <input type="hidden" value="<%= dashboard_filter_url() %>" id="filter-company-url" />
+                </div>
+                <div class="mb-3 justify-self-end content-center">
+                  <%= button_to 'Download report', dashboard_download_report_path, method: :get, class: "font-athiti cursor-pointer rounded-md bg-red-900 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-700", form: { "data-turbo" => "false" } %>
+                </div>
+            </div>
+
+            <div class="graph-details">
+                <%= render "graph" %>
+            </div>
+        </div>
+        <div class="hidden p-4 rounded-lg" id="styled-detail" role="tabpanel" aria-labelledby="detail-tab">
+            <%= render "detail" %>
+        </div>
+    </div>
+    <%= render partial: "confirm_delete_modal" %>
+</div>

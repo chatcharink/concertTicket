@@ -1,0 +1,2 @@
+class ChannelToKnow < ApplicationRecord
+end

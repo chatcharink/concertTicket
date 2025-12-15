@@ -1,0 +1,52 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 m-auto bg-white p-5 rounded-lg mt-5">
+    <div class="h-48 bg-red-900 rounded-lg">
+        <p class="p-4 text-white font-athiti"><%= t("dashboard.graph_title1") %></p>
+        <div class="items-center text-center">
+            <span class="text-7xl text-white font-bold font-athiti"><%= @count.sum %></span>
+            <span class="text-white font-bold ps-8 font-athiti"><%= t("dashboard.unit") %></span>
+        </div>
+    </div>
+    <div class="h-48 bg-red-700 rounded-lg">
+        <p class="p-4 text-white font-athiti"><%= t("dashboard.graph_title2") %></p>
+        <div class="items-center text-center">
+            <span class="text-7xl text-white font-bold font-athiti"><%= @count[0] %></span>
+            <span class="text-white font-bold ps-8 font-athiti"><%= t("dashboard.unit") %></span>
+        </div>
+    </div>
+    <div class="h-48 bg-red-500 rounded-lg">
+        <p class="p-4 text-white font-athiti"><%= t("dashboard.graph_title3") %></p>
+        <div class="items-center text-center">
+            <span class="text-7xl text-white font-bold font-athiti"><%= @count[1] %></span>
+            <span class="text-white font-bold ps-8 font-athiti"><%= t("dashboard.unit") %></span>
+        </div>
+    </div>
+    <div class="h-48 bg-red-300 rounded-lg">
+        <p class="p-4 text-white font-athiti"><%= t("dashboard.graph_title4") %></p>
+        <div class="items-center text-center">
+            <span class="text-7xl text-white font-bold font-athiti"><%= @count[2] %></span>
+            <span class="text-white font-bold ps-8 font-athiti"><%= t("dashboard.unit") %></span>
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 m-auto mt-10 max-h-full p-5 min-h-full font-athiti bg-white rounded-lg">
+    <%= column_chart @arr_data, colors: ["#641e16", "#c0392b", "#f2d7d5"] %>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 m-auto mt-10 max-h-full p-5 min-h-full font-athiti bg-white rounded-lg">
+    <div class="rounded-lg">
+        <div class="graph-channel">
+            <p class="p-4 text-red-900 font-athiti font-semibold"><%= t("dashboard.title_graph_channel_to_know") %></p>
+            <%= pie_chart @channel, colors: ["#922b21", "#1F618D", "#27AE60", "#F1C40F", "#E67E22"] %>
+        </div>
+        <div class="graph-participate">
+            <p class="p-4 text-red-900 font-athiti font-semibold"><%= t("dashboard.title_graph_participate") %></p>
+            <%= column_chart @participate_data, colors: ["#C81E1E", "#F8B4B4"] %>
+        </div>
+    </div>
+
+    <div class="rounded-lg">
+        <p class="p-4 text-red-900 font-athiti font-semibold"><%= t("dashboard.title_graph_province") %></p>
+        <%= bar_chart @province, colors: ["#641e16"], height: "650px" %>
+    </div>
+</div>

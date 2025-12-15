@@ -1,0 +1,7 @@
+<div class="justify-content-center items-center min-h-screen content-center" id="div-form-user" data-controller="user">
+    <div class="justify-content-center items-center h-fit w-2xl m-auto bg-white rounded-lg p-10">
+        <%= form_for @user, url: user_path(format: :json), method: :POST do |f| %>
+            <%= render partial: "form", locals: {f: f} %>
+        <% end %>
+    </div>
+</div>

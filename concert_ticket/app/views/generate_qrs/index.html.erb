@@ -1,0 +1,91 @@
+<% is_user_login? %>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-30 md:gap-y-5 justify-content-center items-center min-h-screen w-full mx-auto px-3 mt-20 sm:mt-0 sm:mx-5" data-controller="qrcode">
+    <div>
+        <p class="mb-10 text-3xl lg:text-6xl font-athiti font-semibold text-red-900"><%= session["current_user"]["selected_event"]["name"] %></p>
+
+        <p class="mt-10 mb-2 text-s lg:text-l font-athiti"><%= t("sub_title") %></p>
+
+        <%= form_for :form_qr, url: generate_qr_path(format: :json), method: :POST , html: { data: { "action": "submit->qrcode#generateQr" } } do |f| %>
+
+            <div class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-4 place-content-center">
+                <div class="sm:col-span-2">
+                    <%# <label for="place" class="block text-sm/6 font-medium text-gray-900">ชื่อสถานที่</label> %>
+                    <div class="mt-2">
+                        <%= f.text_field :location, value: "", id: "place-name", class: "block w-full rounded-md bg-white px-3 py-1.5 font-athiti bg-white border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 rounded-s-lg sm:text-sm focus:z-10 disabled:opacity-50 disabled:pointer-events-none placeholder:text-gray-400 sm:text-sm/6", placeholder: t("generate_qr.location_placeholder") %>
+                        <p class="font-athiti mt-2 text-sm text-red-600 dark:text-red-500 hidden" id="location-validate-msg"><%= t("generate_qr.location_validate_message") %></p>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                    <%# <label for="number" class="block text-sm/6 font-medium text-gray-900">จำนวน</label> %>
+                    <div class="mt-2">
+                        <%= f.text_field :numbers, value: "", id: "number", class: "block w-full rounded-md bg-white px-3 py-1.5 font-athiti bg-white border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 rounded-s-lg sm:text-sm focus:z-10 disabled:opacity-50 disabled:pointer-events-none placeholder:text-gray-400 sm:text-sm/6", placeholder: t("generate_qr.number_placeholder") %>
+                        <p class="font-athiti mt-2 text-sm text-red-600 dark:text-red-500 hidden" id="quota-validate-msg"><%= t("generate_qr.quota_validate_message") %></p>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                    <%# <label for="number" class="block text-sm/6 font-medium text-gray-900">จำนวน</label> %>
+                    <div class="mt-2">
+                        <%= f.text_field :email, value: "", id: "email", class: "block w-full rounded-md bg-white px-3 py-1.5 font-athiti bg-white border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 rounded-s-lg sm:text-sm focus:z-10 disabled:opacity-50 disabled:pointer-events-none placeholder:text-gray-400 sm:text-sm/6", placeholder: t("generate_qr.email_placeholder") %>
+                        <p class="font-athiti mt-2 text-sm text-red-600 dark:text-red-500 hidden" id="email-validate-msg"><%= t("generate_qr.email_validate_message") %></p>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                    <%# <label for="number" class="block text-sm/6 font-medium text-gray-900">จำนวน</label> %>
+                    <div class="mt-2">
+                        <%= f.text_field :phone_number, value: "", id: "phone_number", class: "block w-full rounded-md bg-white px-3 py-1.5 font-athiti bg-white border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 rounded-s-lg sm:text-sm focus:z-10 disabled:opacity-50 disabled:pointer-events-none placeholder:text-gray-400 sm:text-sm/6", placeholder: t("generate_qr.phone_number_placeholder") %>
+                        <p class="font-athiti mt-2 text-sm text-red-600 dark:text-red-500 hidden" id="phone-validate-msg"><%= t("generate_qr.phone_number_validate_message") %></p>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="rounded-md bg-red-900 mt-10 px-3 py-2 font-athiti text-sm font-semibold cursor-pointer text-white shadow-xs hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                <svg class="w-4 h-4 text-white inline" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                </svg> <span class="ms-2"><%= t("btn_get_qr") %></span>
+            </button>
+
+            <button id="dropdownSearchButton" data-dropdown-toggle="dropdownSearch" class="rounded-md bg-red-900 mt-10 ms-5 px-3 py-2 font-athiti text-sm font-semibold cursor-pointer text-white shadow-xs hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" type="button">
+                <svg class="w-4 h-4 text-white inline" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                </svg> <span class="ms-2"><%= t("btn_search_qr") %></span>
+            </button>
+
+            <!-- Dropdown menu -->
+            <div id="dropdownSearch" class="z-10 hidden bg-white rounded-lg shadow-sm w-60 dark:bg-gray-700">
+                <div>
+                    <label for="input-group-search" class="sr-only font-athiti">Search</label>
+                    <div class="relative flex rounded-lg justify-self-center">
+                        <input type="text" id="search-location-with-icon" name="search-location-with-icon font-athiti" class="font-athiti py-2.5 sm:py-3 px-4 ps-5 lg:ps-11 block w-50 sm:w-70 lg:w-90 bg-white border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 rounded-s-lg sm:text-sm focus:z-10 disabled:opacity-50 disabled:pointer-events-none placeholder:text-gray-400" placeholder="<%= t("search_qr.search_placeholder") %>">
+                        <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-4">
+                            <svg class="shrink-0 size-4 text-gray-400 dark:text-neutral-500 hidden lg:inline" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.3-4.3"></path>
+                            </svg>
+                        </div>
+                        <button type="button" class="py-3 px-4 justify-center items-center gap-x-2 text-sm font-athiti font-semibold cursor-pointer rounded-e-md border border-transparent bg-red-900 text-white hover:bg-red-700 focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none hidden lg:inline-flex" data-action="click->qrcode#search_qr"><%= t("search_qr.btn_submit_search")%></button>
+                        <button type="button" class="py-3 px-4 justify-center items-center gap-x-2 text-sm font-athiti font-semibold cursor-pointer rounded-e-md border border-transparent bg-red-900 text-white hover:bg-red-700 focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none inline-flex lg:hidden" data-action="click->qrcode#search_qr">
+                            <svg class="shrink-0 size-4 text-white dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.3-4.3"></path>
+                            </svg>
+                        </button>
+                        <input type="hidden" value="<%= get_qr_url() %>" id="url-for-search-qr-by-location" />
+                    </div>
+                </div>
+            </div>
+
+        <% end %>
+    </div>
+
+    <div>
+        <%= image_tag("#{APP_CONFIG[:application_path]}/pictures/tickets_picture.png", class: "justify-self-center", style: "width: 30rem;", alt: "ticket") %>
+    </div>
+
+    <div id="display-qr-code">
+        <%= render "qr_modal" %>
+    </div>
+</div>

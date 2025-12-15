@@ -1,0 +1,49 @@
+<% is_user_login? %>
+<div class="absolute inset-0 bg-cover bg-center bg-repeat z-0" style="background-image: url(<%= APP_CONFIG[:application_path] %>/pictures/select-event-background.png)"></div>
+<div class="relative justify-content-center items-center min-h-screen content-center z-1">
+    <div class="grid grid-cols-1 gap-x-6 gap-y-10 md:gap-y-5 justify-content-center items-center h-fit w-full lg:w-2xl m-auto bg-white rounded-lg px-10 pb-10" data-controller="concert">
+        <div class="justify-self-end">
+            <button type="button" data-modal-target="new-event-modal" data-modal-toggle="new-event-modal" data-action="click->concert#clearData" class="rounded-b-lg bg-red-900 px-3 py-2 text-sm font-athiti font-semibold text-white text-center cursor-pointer shadow-xs hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 m-auto">
+                    <path fill-rule="evenodd" d="M12 4.5a.75.75 0 01.75.75v6h6a.75.75 0 010 1.5h-6v6a.75.75 0 01-1.5 0v-6h-6a.75.75 0 010-1.5h6v-6A.75.75 0 0112 4.5z" clip-rule="evenodd" />
+                </svg><p>New</p>
+            </button>
+        </div>
+        <%= form_for "form_select_concert", url: select_event_path(format: :json), method: :POST do |f| %>
+        
+        <div class="sm:col-span-full">
+            <label for="concert_name" class="font-athiti block text-sm/6 font-semibold text-gray-900"><%= t("select_event")%></label>
+            <div class="mt-2">
+                <%= f.select :event, options_for_select(get_event(), selected: @deafult_concert.blank? ? nil : @deafult_concert.id), {prompt: t("select_event_prompt")}, {class: "inline w-[90%] font-athiti font-medium rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border-gray-400 -outline-offset-1 outline-gray-200 focus:border-gray-200 focus:border-gray-200 placeholder:text-gray-400 sm:text-sm/6", id: "concert_name", required: true, "data-action": "change->concert#select_event", "data-concert-url-param": get_default_url()} %>
+                <div class="inline text-center ms-[1px] lg:ms-[20px]">
+                    <svg class="w-6 h-6 p-1 inline rounded-lg text-gray-800 cursor-pointer hover:bg-red-900 hover:text-white" id="edit-concert-id" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" data-id="<%= @deafult_concert.blank? ? "" : @deafult_concert.id %>" data-action="click->concert#editConcert" data-concert-url-param="<%= get_concert_path() %>">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-6 space-y-6">
+            <div class="flex gap-3">
+                <div class="flex h-6 shrink-0 items-center">
+                    <div class="group grid size-4 grid-cols-1">
+                        <%= f.check_box :is_default, {id: "is_default", class: "col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-red-600 checked:bg-red-900 checked:text-red-900 indeterminate:border-red-600 indeterminate:bg-red-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto", checked: @deafult_concert.blank? ? false : @deafult_concert.is_default.to_i > 0}, 1 %>
+                    </div>
+                </div>
+                <div class="text-sm/6">
+                    <label for="is_default" class="font-athiti font-medium text-gray-900"><%= t("check_default") %></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="sm:col-span-full mt-10 justify-self-center">
+            <%= f.submit t("btn_select_event"), class: "rounded-md bg-red-900 px-3 py-2 text-sm font-athiti font-semibold text-white shadow-xs hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900 cursor-pointer" %>
+        </div>
+        
+        <% end %>
+    </div>
+</div>
+
+<div id="div-action-concert-info">
+    <%= render partial: "new_event_modal", locals: {title: t("add_event.title"), button: t("add_event.btn_create_event"), name: "", date: "", is_check: false, id: ""} %>
+</div>
